@@ -1,11 +1,13 @@
 import { MusicContextProvider } from './context/MusicContext';
-import Player from './components/Player';
+import PlayerV2 from './components/PlayerV2';
+import HelmetHead from './HelmetHead';
 
 const App = () => {
   return (
-    <div className='p-5'>
+    <div className='text-primary'>
+      <HelmetHead />
       <MusicContextProvider>
-        <Player />
+        <PlayerV2 />
       </MusicContextProvider>
     </div>
   );
