@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { createRef, useRef, useState } from "react";
 import { useMusic } from "../context/MusicContext";
 import { BackwardIcon, ForwardIcon } from "@heroicons/react/16/solid";
 import { PauseCircleIcon, PlayCircleIcon } from "@heroicons/react/24/outline";
@@ -46,16 +46,33 @@ const PlayerV2 = () => {
       }
    }
 
+   const videoRefs = useRef([]);
+   for (let i = 0; i < vidArray.length; i++) {
+      videoRefs.current.push(createRef());
+   }
+
    return (
    <div className='min-w-[100vw] min-h-screen flex justify-center items-center'>
       {currentTrack && (
          <>
+         {/* Just to pre-load all the bg videos for better experience */}
+         {vidArray.map((videoUrl, index) => (
+            <video 
+               key={index}
+               ref={videoRefs.current[index]}
+               src={videoUrl}
+               loop
+               muted
+               className='hidden absolute w-full h-screen right-0 top-0 object-cover z-[-1] saturate-[5]'
+               style={{display: "none"}}
+            />
+         ))}
          <video src={vidArray[videoIndex]} loop muted autoPlay className='w-full h-screen absolute right-0 top-0 object-cover z-[-1] saturate-[5]'></video>
          <div className="black-screen w-screen h-screen absolute pointer-events-none bg-[#11111133]"></div>
          <div className="music-container w-[350px] py-9 px-10 flex flex-col justify-center items-center text-center rounded-[36px] shadow-2xl backdrop-blur-lg font-semibold">
             <p className=' text-primaryLight m-0 mb-3'>Sudhil&apos;s Retro Player</p>
             <p className='track-name text-center my-0 mx-auto text-2xl'>{currentTrack?.title}</p>
-            <p className='artist-name text-primaryDim text-xl font-normal my-1 mx-0'>{currentTrack?.songArtist || "Sudhil"}</p>
+            <p className='artist-name text-primaryDim text-xl font-normal my-1 mx-0'>{currentTrack?.songArtist || "Artist"}</p>
             <div className="relative">
                <img src={`${BASE_URL}${currentTrack.artworkUrl}`} className={`${avatarClass[avatarClassIndex]} ${isPlaying ? 'animate-avatar' : ''} w-[200px] h-[200px] rounded-full my-5 mx-0 relative cursor-pointer`} onClick={handleAvatar} alt="song Avatar"/>
                <div className={`w-[200px] h-[200px] absolute rounded-full top-[20px] left-0 border-[1px] border-gray-50 ${isPlaying ? 'animate-pulse' : ''}`}></div>
@@ -75,7 +92,7 @@ const PlayerV2 = () => {
                <ForwardIcon className="w-8 h-8 cursor-pointer" onClick={nextTrack}/>
             </div>
          </div>
-         <div className="change-bg w-[200px] h-4 hover:h-8 bg-[#eee] text-[#eee] hover:text-[#222] text-center font-semibold pt-1 cursor-pointer absolute bottom-0 rounded-tl-xl rounded-tr-xl z-[10]" onClick={handleChangeBackground}>
+         <div className="change-bg w-[200px] h-8 sm:h-4 hover:h-8 bg-[#eee] text-[#222] sm:text-[#eee] hover:text-[#222] text-center font-semibold pt-1 cursor-pointer absolute bottom-0 rounded-tl-xl rounded-tr-xl z-[10]" onClick={handleChangeBackground}>
             Change Background
          </div>
          </>
