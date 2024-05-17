@@ -74,7 +74,13 @@ const PlayerV2 = () => {
             <p className='track-name text-center my-0 mx-auto text-2xl'>{currentTrack?.title}</p>
             <p className='artist-name text-primaryDim text-xl font-normal my-1 mx-0'>{currentTrack?.songArtist || "Artist"}</p>
             <div className="relative">
-               <img src={`${BASE_URL}${currentTrack.artworkUrl}`} className={`${avatarClass[avatarClassIndex]} ${isPlaying ? 'animate-avatar' : ''} w-[200px] h-[200px] rounded-full my-5 mx-0 relative cursor-pointer`} onClick={handleAvatar} alt="song Avatar"/>
+               <img
+                  src={`${currentTrack.localArt}`}
+                  // src={`${BASE_URL}${currentTrack.artworkUrl}`}
+                  className={`${avatarClass[avatarClassIndex]} ${isPlaying ? 'animate-avatar' : ''} w-[200px] h-[200px] rounded-full my-5 mx-0 relative cursor-pointer`}
+                  onClick={handleAvatar}
+                  alt="song Avatar"
+               />
                <div className={`w-[200px] h-[200px] absolute rounded-full top-[20px] left-0 border-[1px] border-gray-50 ${isPlaying ? 'animate-pulse' : ''}`}></div>
             </div>
             <div className="w-full flex justify-between font-semibold">
@@ -92,7 +98,7 @@ const PlayerV2 = () => {
                <ForwardIcon className="w-8 h-8 cursor-pointer" onClick={nextTrack}/>
             </div>
          </div>
-         <div className="change-bg w-[200px] h-8 sm:h-4 hover:h-8 bg-[#eee] text-[#222] sm:text-[#eee] hover:text-[#222] text-center font-semibold pt-1 cursor-pointer absolute bottom-0 rounded-tl-xl rounded-tr-xl z-[10]" onClick={handleChangeBackground}>
+         <div className="change-bg w-[200px] h-8 bg-[#eee] text-[#222] text-center font-extralight pt-1 cursor-pointer absolute top-0 rounded-bl-xl rounded-br-xl z-[10]" onClick={handleChangeBackground}>
             Change Background
          </div>
          </>

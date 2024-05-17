@@ -1,28 +1,31 @@
 import { createContext, useEffect, useState, useContext } from "react";
 import { Howl } from 'howler';
 import BASE_URL from "../../config";
+import staticTracks from "../tracks.json";
 
 const MusicContext = createContext();
 
 export const MusicContextProvider = ({ children }) => {
-   const [tracks, setTracks] = useState([]);
+   const [tracks, setTracks] = useState(staticTracks);
+   // const [tracks, setTracks] = useState([]);
    const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
    const [isPlaying, setIsPlaying] = useState(false);
    const [sound, setSound] = useState(null);
 
-   useEffect(() => {
-      const fetchTracks = async () => {
-         try {
-            const response = await fetch(`${BASE_URL}/api/v1/tracks?limit=20&cursor=1`);
-            const data = await response.json();
-            setTracks(data.body.tracks);
-         } catch (error) {
-            console.error('Error fetching tracks:', error);
-         }
-      };
+   // The dynamic track fetching is diabled for now. Currently using the local static track list of 50.
+   // useEffect(() => {
+   //    const fetchTracks = async () => {
+   //       try {
+   //          const response = await fetch(`${BASE_URL}/api/v1/tracks?limit=20&cursor=1`);
+   //          const data = await response.json();
+   //          setTracks(data.body.tracks);
+   //       } catch (error) {
+   //          console.error('Error fetching tracks:', error);
+   //       }
+   //    };
 
-      fetchTracks();
-   }, []);
+   //    fetchTracks();
+   // }, []);
 
 
    useEffect(() => {
@@ -31,7 +34,8 @@ export const MusicContextProvider = ({ children }) => {
       }
 
       const newSound = new Howl({
-         src: [`${BASE_URL}${tracks?.[currentTrackIndex]?.streamUrl}`],
+         src: [`${tracks?.[currentTrackIndex]?.localAudio}`],
+         // src: [`${BASE_URL}${tracks?.[currentTrackIndex]?.streamUrl}`],
          html5: true,
          autoplay: true,
          loop: true,
