@@ -37,7 +37,7 @@ const PlayerV2 = () => {
 
    // Change BG Video
    const [videoIndex, setVideoIndex] = useState(0);
-   const vidArray = ['/videos/video1.mp4','/videos/video2.mp4','/videos/video3.mp4','/videos/video4.mov','/videos/video5.mp4','/videos/video6.mp4', '/videos/video7.mp4', '/videos/video8.mp4', '/videos/video9.mp4', '/videos/video10.mp4', '/videos/video11.mp4'];
+   const vidArray = ['/videos/video1.mp4','/videos/video2.mp4','/videos/video3.mp4','/videos/video6.mp4', '/videos/video7.mp4', '/videos/video8.mp4', '/videos/video9.mp4', '/videos/video10.mp4'];
    const handleChangeBackground = () => {
       if (videoIndex >= vidArray.length - 1) {
          setVideoIndex(0);
@@ -55,18 +55,6 @@ const PlayerV2 = () => {
    <div className='min-w-[100vw] min-h-screen flex justify-center items-center'>
       {currentTrack && (
          <>
-         {/* Just to pre-load all the bg videos for better experience */}
-         {vidArray.map((videoUrl, index) => (
-            <video 
-               key={index}
-               ref={videoRefs.current[index]}
-               src={videoUrl}
-               loop
-               muted
-               className='hidden absolute w-full h-screen right-0 top-0 object-cover z-[-1] saturate-[5]'
-               style={{display: "none"}}
-            />
-         ))}
          <video src={vidArray[videoIndex]} loop muted autoPlay className='w-full h-screen absolute right-0 top-0 object-cover z-[-1] saturate-[5]'></video>
          <div className="black-screen w-screen h-screen absolute pointer-events-none bg-[#11111133]"></div>
          <div className="music-container w-[350px] py-9 px-10 flex flex-col justify-center items-center text-center rounded-[36px] shadow-2xl backdrop-blur-lg font-semibold">
