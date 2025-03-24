@@ -1,5 +1,4 @@
 # React-Music-Player
-
-Get into the groove with easy-to-use music player! Built with React and Vite, it lets you enjoy retro tunes from the retrowave API hassle-free. Just hit play and let the nostalgic beats take you back in time!😍
-
 - Made with React + Vite, tailwindcss, Howler.js, and retrowave API.
+
+<h3><a href="https://retro-music-player-1ieu.vercel.app/">Click to show demo</a></h3>
