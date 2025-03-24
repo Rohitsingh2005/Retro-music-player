@@ -58,7 +58,7 @@ const PlayerV2 = () => {
          <video src={vidArray[videoIndex]} loop muted autoPlay className='w-full h-screen absolute right-0 top-0 object-cover z-[-1] saturate-[5]'></video>
          <div className="black-screen w-screen h-screen absolute pointer-events-none bg-[#11111133]"></div>
          <div className="music-container w-[350px] py-9 px-10 flex flex-col justify-center items-center text-center rounded-[36px] shadow-2xl backdrop-blur-lg font-semibold">
-            <p className=' text-primaryLight m-0 mb-3'>Sudhil&apos;s Retro Player</p>
+            <p className=' text-primaryLight m-0 mb-3'>Retro Player</p>
             <p className='track-name text-center my-0 mx-auto text-2xl'>{currentTrack?.title}</p>
             <p className='artist-name text-primaryDim text-xl font-normal my-1 mx-0'>{currentTrack?.songArtist || "Artist"}</p>
             <div className="relative">
